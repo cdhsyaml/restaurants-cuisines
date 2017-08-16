@@ -9,15 +9,17 @@ import java.util.List;
 
         //create
         void add (Restaurant restaurant);
-        //read
 
+        //read
         List<Restaurant> getAll();
 
         Restaurant findById(int id);
 
 
         //update
-        //  void update(int id, String content);
+          void update(int id, String name);
+
+
         //delete
 //   void deleteRestaurant();
 

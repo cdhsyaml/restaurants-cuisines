@@ -56,4 +56,21 @@ public class Sql2oRestaurantDaoTest {
         restaurantDao.add(restaurant);
         assertEquals(1, restaurantDao.getAll().size());
     }
+
+    @Test
+    public void noRestaurantsReturnsEmptyList() throws Exception {
+        assertEquals(0, restaurantDao.getAll().size());
+    }
+
+    @Test
+    public void updateChangesRestaurantContent() throws Exception {
+        String initialName = "Olive Garden";
+        Restaurant restaurant = new Restaurant(initialName);
+        restaurantDao.add(restaurant);
+
+        restaurantDao.update(restaurant.getId(), "Outback Steakhouse");
+        Restaurant updatedRestaurant = restaurantDao.findById(restaurant.getId());
+        assertNotEquals(initialName, updatedRestaurant.getName());
+    }
+
 }
