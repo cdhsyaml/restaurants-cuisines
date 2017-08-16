@@ -4,15 +4,12 @@ package models;
 public class Restaurant {
     private String name;
     private int id;
+    private int cuisineId;
 
-    public Restaurant(String name){
+    public Restaurant(String name, int cuisineId){
         this.name = name;
+        this.cuisineId = cuisineId;
     }
-
-
-
-
-
 
     ///getters + setters///
     public String getName() {
@@ -31,6 +28,13 @@ public class Restaurant {
         this.id = id;
     }
 
+    public int getCuisineId() {
+        return cuisineId;
+    }
+
+    public void setCuisineId(int cuisineId) {
+        this.cuisineId = cuisineId;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

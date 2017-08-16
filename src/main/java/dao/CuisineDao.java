@@ -1,6 +1,7 @@
 package dao;
 
 import models.Cuisine;
+import models.Restaurant;
 import java.util.List;
 
 
@@ -8,6 +9,7 @@ public interface CuisineDao {
 
     //create -------------
     void add (Cuisine cuisine);
+    List<Restaurant> getAllRestaurantsByCuisine(int cuisineId);
 
     //read -------------
     List<Cuisine> getAll();

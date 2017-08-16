@@ -80,4 +80,12 @@ public class Sql2oCuisineDao implements CuisineDao{
             System.out.println(ex);
         }
     }
+    @Override
+    public List<Restaurant> getAllRestaurantsByCuisine(int cuisineId) {
+        try (Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM restaurants WHERE cuisineId = :cuisineId")
+                    .addParameter("cuisineId", cuisineId)//raw sql
+                    .executeAndFetch(Restaurant.class); //fetch a list
+        }
+    }
 }

@@ -17,7 +17,7 @@ import java.util.List;
 
 
         //update -------------
-          void update(int id, String name);
+          void update(int id, String name, int cuisineId);
 
 
         //delete -------------

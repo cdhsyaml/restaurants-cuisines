@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{#block "title"}}Restaurant{{/block}}</title>
+
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+</head>
+<body>
+<ul class="nav nav-tabs">
+   <li role="presentation" class="active"><a href="#">Home</a></li>
+   <li role="presentation"><a href="/restaurant/new">Add a New Restaurant</a></li>
+
+   <li role="presentation" class="dropdown">
+       <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+           Cuisine Menu <span class="caret"></span>
+       </a>
+       <ul class="dropdown-menu">
+           {{#if cuisines}}
+               {{#each cuisines}}
+                   <li><a href="/cuisines/{{id}}">{{type}}</a></li>
+               {{/each}}
+               <li><a href="/cuisines/new">Add a Cuisine</a></li>
+
+           {{else}}
+               <li><a href="/cuisines/new">Add a Cuisine</a></li>
+           {{/if}}
+       </ul>
+   </li>
+</ul>
+<div class="container">
+    <!--begin main template-->
+    <div class="page-header">
+        <img src="/images/burger.jpg" width="70%" alt="pic of burger">
+        <h1>Welcome to our Restaurant List. <small>Let's be organized, focused, and efficient.</small></h1>
+    </div>
+
+    <div class="col-md-12">
+        {{#block "content"}}
+        {{/block}}
+
+    </div>
+</div>
+<!--end main template-->
+{{#block "footer"}}
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted"><a href="/restaurants/delete">DELETE ALL TASKS</a></p>
+        </div>
+    </footer>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </html>
+{{/block}}

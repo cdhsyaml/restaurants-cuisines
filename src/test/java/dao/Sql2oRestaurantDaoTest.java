@@ -32,8 +32,8 @@ public class Sql2oRestaurantDaoTest {
         conn.close();
     }
 
-    public Restaurant setupNewRestaurant() { return new Restaurant("Olive Garden");}
-    public Restaurant setupNewRestaurant2() { return new Restaurant("Chili's");}
+    public Restaurant setupNewRestaurant() { return new Restaurant("Olive Garden",  1);}
+    public Restaurant setupNewRestaurant2() { return new Restaurant("Chili's", 2);}
 
     @Test
     public void addingCourseSetsId() throws Exception {
@@ -67,10 +67,10 @@ public class Sql2oRestaurantDaoTest {
     @Test
     public void updateChangesRestaurantContent() throws Exception {
         String initialName = "Olive Garden";
-        Restaurant restaurant = new Restaurant(initialName);
+        Restaurant restaurant = new Restaurant(initialName, 1);
         restaurantDao.add(restaurant);
 
-        restaurantDao.update(restaurant.getId(), "Outback Steakhouse");
+        restaurantDao.update(restaurant.getId(), "Outback Steakhouse", 1);
         Restaurant updatedRestaurant = restaurantDao.findById(restaurant.getId());
         assertNotEquals(initialName, updatedRestaurant.getName());
     }
@@ -92,6 +92,13 @@ public class Sql2oRestaurantDaoTest {
         int daoSize = restaurantDao.getAll().size();
         restaurantDao.clearAllRestaurants();
         assertTrue(daoSize > 0 && daoSize > restaurantDao.getAll().size());
+    }
+    @Test
+    public void categoryIdIsReturnedCorrectly() throws Exception {
+        Restaurant restaurant = setupNewRestaurant();
+        int originalCuisineId = restaurant.getCuisineId();
+        restaurantDao.add(restaurant);
+        assertEquals(originalCuisineId, restaurantDao.findById(restaurant.getId()).getCuisineId());
     }
 
 }

@@ -1,0 +1,15 @@
+{{#partial "content"}}
+
+    <p>Name:</p>
+
+    <p>{{ restaurant.name }}</p>
+    <p>{{ restaurant.location }}</p>
+
+
+        <a href="/restaurants/{{restaurant.id}}/update">Edit this restaurant</a><br>
+        <a href="/cuisines/{{restaurant.cuisineId}}/restaurants/{{restaurant.id}}/delete">DELETE this restaurant (no undo)</a>
+    </p>
+
+{{/partial}}
+
+{{> layout.hbs}}

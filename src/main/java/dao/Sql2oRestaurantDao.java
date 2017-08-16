@@ -18,11 +18,13 @@ public class Sql2oRestaurantDao implements RestaurantDao {
 
     @Override
     public void add(Restaurant restaurant) {
-        String sql = "INSERT INTO restaurants (name) VALUES (:name)";
+        String sql = "INSERT INTO restaurants (name, cuisineId) VALUES (:name, :cuisineId)";
         try(Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql)
                     .addParameter("name", restaurant.getName())
+                    .addParameter("cuisineId", restaurant.getCuisineId())
                     .addColumnMapping("NAME", "name")
+                    .addColumnMapping("CUISINEID", "cuisineId")
                     .executeUpdate()
                     .getKey();
             restaurant.setId(id);
@@ -49,7 +51,7 @@ public class Sql2oRestaurantDao implements RestaurantDao {
     }
 
     @Override
-    public void update(int id, String newName){
+    public void update(int id, String newName, int newCuisineId){
         String sql = "UPDATE restaurants SET (name) = (:name) WHERE id = :id";
         try(Connection con = sql2o.open()) {
             con.createQuery(sql)

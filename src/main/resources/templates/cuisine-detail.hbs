@@ -1,0 +1,21 @@
+{{#partial "content"}}
+   <p>Here are all the restaurants listed in the cuisine type:    {{cuisine.type}} </p>
+
+   <ul>
+       {{#each restaurants}}
+           <li>
+               <h5>Restaurant Name:</h5>
+               <p>{{name }}</p>
+
+               <a href="/restaurants/update">Edit this restaurant</a><br>
+               <a href="/restaurants/delete">DELETE this restaurant (no undo)</a>
+               </p>
+           </li>
+       {{/each}}
+   </ul>
+   <a href="/cuisines/{{cuisine.id}}/update">Edit this cuisine</a><br>
+   <a href="/cuisines/{{cuisine.id}}/delete">DELETE this cuisine (no undo)</a>
+
+{{/partial}}
+
+{{> layout.hbs}}
