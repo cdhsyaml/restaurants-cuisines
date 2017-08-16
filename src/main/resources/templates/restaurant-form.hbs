@@ -1,10 +1,10 @@
 {{#partial "content"}}
 
    {{#if editRestaurant}}
-       <form action="/restaurants/update" method="post">
+       <form action="/cuisines/{{restaurant.cuisineId}}/restaurants/{{id}}/update" method="post"> <!--fix-->
        <h1>Edit this Restaurant!</h1>
        <select id="restaurantToEditId" name="restaurantToEditId">
-       {{#each tasks }}
+       {{#each restaurants }}
                <option value="{{id}}">{{name}}</option>
        {{/each}}
        </select>
@@ -21,7 +21,7 @@
            <p>Don't see the right cuisine?<a href="/cuisines/new">Add a new one first.</a></p>
 
    {{else}}
-           <h2>Add a new Task!</h2>
+           <h2>Add a new Restaurant!</h2>
 
        <form action="/restaurants/new" method="post">
        {{#if cuisines}}
@@ -32,7 +32,7 @@
            <select id="cuisineId" name="cuisineId">
 
                {{#each cuisines}}
-                   <option value="{{id}}">{{type}}</option> <!--what is going on here? -->
+                   <option value="{{id}}">{{cuisine.type}}</option> <!--what is going on here? -->
                {{/each}}
            </select>
            <p>Don't see the right cuisine?<a href="/cuisines/new">Add a new one first.</a></p>

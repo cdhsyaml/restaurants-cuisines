@@ -92,7 +92,7 @@ public class Sql2oCuisineDaoTest {
         assertTrue(daoSize > 0 && daoSize > cuisineDao.getAll().size());
     }
     @Test
-    public void getAllTasksByCategoryReturnsTasksCorrectly() throws Exception {
+    public void getAllRestaurantsByCuisineReturnsRestaurantsCorrectly() throws Exception {
         Cuisine cuisine = new Cuisine ("American");
         cuisineDao.add(cuisine);
         int cuisineId = cuisine.getId();
