@@ -31,6 +31,14 @@ public class Sql2oRestaurantDao implements RestaurantDao {
         }
     }
 
+    @Override
+    public Restaurant findById(int id) {
+        try(Connection con = sql2o.open()){
+            return con.createQuery("SELECT * FROM restaurants WHERE id = :id")
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(Restaurant.class);
+        }
+    }
 
 
 

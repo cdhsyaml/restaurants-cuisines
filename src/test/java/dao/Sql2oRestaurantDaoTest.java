@@ -9,7 +9,7 @@ import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
 
-
+import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 public class Sql2oRestaurantDaoTest {
@@ -31,13 +31,24 @@ public class Sql2oRestaurantDaoTest {
         conn.close();
     }
 
+    public Restaurant setupNewRestaurant() { return new Restaurant("Olive Garden");}
 
     @Test
     public void addingCourseSetsId() throws Exception {
-        Restaurant restaurant = new Restaurant("Olive Garden");
+       Restaurant restaurant = setupNewRestaurant();
         int originalRestaurantId = restaurant.getId();
         restaurantDao.add(restaurant);
         assertNotEquals(originalRestaurantId, restaurant.getId()); //how does this work?
+    }
+
+
+
+    @Test
+    public void existingRestaurantCanBeFoundById() throws Exception {
+        Restaurant restaurant = setupNewRestaurant();
+        restaurantDao.add(restaurant);
+        Restaurant foundRestaurant = restaurantDao.findById(restaurant.getId());
+        assertEquals(restaurant, foundRestaurant);
     }
 
 }

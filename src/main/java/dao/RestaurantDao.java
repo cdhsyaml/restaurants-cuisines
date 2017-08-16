@@ -15,7 +15,7 @@ import java.util.List;
 
 //        List<Restaurant> getAll();
 //
-//        Restaurant findById(int id);
+        Restaurant findById(int id);
 
 
 
