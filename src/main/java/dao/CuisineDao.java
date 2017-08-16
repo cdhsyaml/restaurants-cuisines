@@ -22,6 +22,6 @@ public interface CuisineDao {
     //delete -------------
     void deleteCuisineById(int id);
 //
-//    void clearAllCuisines();
+    void clearAllCuisines();
 
 }

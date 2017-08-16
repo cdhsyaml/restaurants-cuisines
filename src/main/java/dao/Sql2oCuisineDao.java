@@ -70,4 +70,14 @@ public class Sql2oCuisineDao implements CuisineDao{
             System.out.println(ex);
         }
     }
+    @Override
+    public void clearAllCuisines() {
+        String sql = "DELETE from cuisines";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .executeUpdate();
+        } catch (Sql2oException ex){
+            System.out.println(ex);
+        }
+    }
 }

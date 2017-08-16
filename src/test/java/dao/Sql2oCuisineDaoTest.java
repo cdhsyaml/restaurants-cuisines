@@ -73,14 +73,23 @@ public class Sql2oCuisineDaoTest {
         assertNotEquals(initialType, updatedCuisine.getType());
     }
     @Test
-    public void deleteByIdDeletesCorrectRestaurant() throws Exception {
+    public void deleteByIdDeletesCorrectCuisine() throws Exception {
         Cuisine cuisine = setupNewCuisine();
         cuisineDao.add(cuisine);
         cuisineDao.deleteCuisineById(cuisine.getId());
         assertEquals(0, cuisineDao.getAll().size());
     }
 
-
+    @Test
+    public void clearAllClearsAll() throws Exception {
+        Cuisine cuisine = setupNewCuisine();
+        Cuisine cuisine2 = setupNewCuisine2();
+        cuisineDao.add(cuisine);
+        cuisineDao.add(cuisine2);
+        int daoSize = cuisineDao.getAll().size();
+        cuisineDao.clearAllCuisines();
+        assertTrue(daoSize > 0 && daoSize > cuisineDao.getAll().size());
+    }
     public Cuisine setupNewCuisine() { return new Cuisine("Thai");}
     public Cuisine setupNewCuisine2() { return new Cuisine("American");}
 }
