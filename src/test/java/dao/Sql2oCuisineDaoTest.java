@@ -3,6 +3,7 @@ package dao;
 import models.Cuisine;
 
 import models.Cuisine;
+import models.Cuisine;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -57,6 +58,20 @@ public class Sql2oCuisineDaoTest {
         assertEquals(1, cuisineDao.getAll().size());
     }
 
+    @Test
+    public void noCuisinesReturnsEmptyList() throws Exception {
+        assertEquals(0, cuisineDao.getAll().size());
+    }
+    @Test
+    public void updateChangesCuisineContent() throws Exception {
+        String initialType = "Thai";
+        Cuisine cuisine = new Cuisine(initialType);
+        cuisineDao.add(cuisine);
+
+        cuisineDao.update(cuisine.getId(), "American");
+        Cuisine updatedCuisine = cuisineDao.findById(cuisine.getId());
+        assertNotEquals(initialType, updatedCuisine.getType());
+    }
 
     public Cuisine setupNewCuisine() { return new Cuisine("Thai");}
     public Cuisine setupNewCuisine2() { return new Cuisine("American");}

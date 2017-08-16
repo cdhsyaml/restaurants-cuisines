@@ -15,8 +15,8 @@ public interface CuisineDao {
     Cuisine findById(int id);
 //
 //
-//    //update -------------
-//    void update(int id, String name);
+    //update -------------
+    void update(int id, String type);
 //
 //
 //    //delete -------------

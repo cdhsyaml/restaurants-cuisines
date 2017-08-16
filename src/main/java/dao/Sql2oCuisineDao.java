@@ -46,5 +46,17 @@ public class Sql2oCuisineDao implements CuisineDao{
                     .executeAndFetch(Cuisine.class);
         }
     }
+    @Override
+    public void update(int id, String newType){
+        String sql = "UPDATE cuisines SET (type) = (:type) WHERE id = :id";
+        try(Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("type", newType)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        } catch (Sql2oException ex){
+            System.out.println(ex);
+        }
+    }
 
 }
