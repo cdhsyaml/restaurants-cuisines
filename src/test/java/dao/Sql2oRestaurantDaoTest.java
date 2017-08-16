@@ -93,4 +93,5 @@ public class Sql2oRestaurantDaoTest {
         restaurantDao.clearAllRestaurants();
         assertTrue(daoSize > 0 && daoSize > restaurantDao.getAll().size());
     }
+
 }

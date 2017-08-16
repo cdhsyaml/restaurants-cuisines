@@ -4,3 +4,8 @@ CREATE TABLE IF NOT EXISTS restaurants (
   id int PRIMARY KEY auto_increment,
   name VARCHAR,
   );
+
+  CREATE TABLE IF NOT EXISTS cuisines (
+  id int PRIMARY KEY auto_increment,
+  type VARCHAR
+  );
