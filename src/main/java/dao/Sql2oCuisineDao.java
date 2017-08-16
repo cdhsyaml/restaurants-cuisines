@@ -59,4 +59,15 @@ public class Sql2oCuisineDao implements CuisineDao{
         }
     }
 
+    @Override
+    public void deleteCuisineById(int id) {
+        String sql = "DELETE from cuisines WHERE id = :id";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        } catch (Sql2oException ex){
+            System.out.println(ex);
+        }
+    }
 }

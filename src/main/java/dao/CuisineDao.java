@@ -19,8 +19,8 @@ public interface CuisineDao {
     void update(int id, String type);
 //
 //
-//    //delete -------------
-//    void deleteCuisineById(int id);
+    //delete -------------
+    void deleteCuisineById(int id);
 //
 //    void clearAllCuisines();
 

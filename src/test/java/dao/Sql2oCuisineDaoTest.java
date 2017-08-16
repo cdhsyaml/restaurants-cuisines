@@ -72,6 +72,14 @@ public class Sql2oCuisineDaoTest {
         Cuisine updatedCuisine = cuisineDao.findById(cuisine.getId());
         assertNotEquals(initialType, updatedCuisine.getType());
     }
+    @Test
+    public void deleteByIdDeletesCorrectRestaurant() throws Exception {
+        Cuisine cuisine = setupNewCuisine();
+        cuisineDao.add(cuisine);
+        cuisineDao.deleteCuisineById(cuisine.getId());
+        assertEquals(0, cuisineDao.getAll().size());
+    }
+
 
     public Cuisine setupNewCuisine() { return new Cuisine("Thai");}
     public Cuisine setupNewCuisine2() { return new Cuisine("American");}
