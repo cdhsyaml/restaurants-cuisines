@@ -1,9 +1,12 @@
 package dao;
 
 import models.Cuisine;
+import models.Restaurant;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
+
+import java.util.List;
 
 
 public class Sql2oCuisineDao implements CuisineDao{
@@ -35,6 +38,13 @@ public class Sql2oCuisineDao implements CuisineDao{
                     .executeAndFetchFirst(Cuisine.class);
         }
 
+    }
+    @Override
+    public List<Cuisine> getAll() {
+        try(Connection con = sql2o.open()){
+            return con.createQuery("SELECT * FROM cuisines")
+                    .executeAndFetch(Cuisine.class);
+        }
     }
 
 }

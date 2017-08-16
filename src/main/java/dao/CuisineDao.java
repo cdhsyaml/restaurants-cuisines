@@ -9,8 +9,8 @@ public interface CuisineDao {
     //create -------------
     void add (Cuisine cuisine);
 
-//    //read -------------
-//    List<Cuisine> getAll();
+    //read -------------
+    List<Cuisine> getAll();
 //
     Cuisine findById(int id);
 //

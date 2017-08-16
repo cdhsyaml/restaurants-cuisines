@@ -2,7 +2,7 @@ package dao;
 
 import models.Cuisine;
 
-import models.Restaurant;
+import models.Cuisine;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,12 +43,20 @@ public class Sql2oCuisineDaoTest {
     }
 
     @Test
-    public void existingRestaurantCanBeFoundById() throws Exception {
+    public void existingCuisineCanBeFoundById() throws Exception {
         Cuisine cuisine = setupNewCuisine();
         cuisineDao.add(cuisine);
         Cuisine foundCuisine = cuisineDao.findById(cuisine.getId());
         assertEquals(cuisine, foundCuisine);
     }
+
+    @Test
+    public void addedCuisinesAreReturnedFromGetAll() throws Exception {
+        Cuisine cuisine = setupNewCuisine();
+        cuisineDao.add(cuisine);
+        assertEquals(1, cuisineDao.getAll().size());
+    }
+
 
     public Cuisine setupNewCuisine() { return new Cuisine("Thai");}
     public Cuisine setupNewCuisine2() { return new Cuisine("American");}
