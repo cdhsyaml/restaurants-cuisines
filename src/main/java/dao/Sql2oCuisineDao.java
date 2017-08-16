@@ -27,5 +27,14 @@ public class Sql2oCuisineDao implements CuisineDao{
             System.out.println(ex);
         }
     }
+    @Override
+    public Cuisine findById(int id) {
+        try(Connection con = sql2o.open()){
+            return con.createQuery("SELECT * FROM cuisines WHERE id = :id")
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(Cuisine.class);
+        }
+
+    }
 
 }

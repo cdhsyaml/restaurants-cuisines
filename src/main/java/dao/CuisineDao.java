@@ -12,7 +12,7 @@ public interface CuisineDao {
 //    //read -------------
 //    List<Cuisine> getAll();
 //
-//    Cuisine findById(int id);
+    Cuisine findById(int id);
 //
 //
 //    //update -------------
