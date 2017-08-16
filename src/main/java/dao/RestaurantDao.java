@@ -11,13 +11,9 @@ import java.util.List;
         void add (Restaurant restaurant);
         //read
 
+        List<Restaurant> getAll();
 
-
-//        List<Restaurant> getAll();
-//
         Restaurant findById(int id);
-
-
 
 
         //update

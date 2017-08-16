@@ -42,7 +42,6 @@ public class Sql2oRestaurantDaoTest {
     }
 
 
-
     @Test
     public void existingRestaurantCanBeFoundById() throws Exception {
         Restaurant restaurant = setupNewRestaurant();
@@ -51,4 +50,10 @@ public class Sql2oRestaurantDaoTest {
         assertEquals(restaurant, foundRestaurant);
     }
 
+    @Test
+    public void addedRestaurantsAreReturnedFromgetAll() throws Exception {
+        Restaurant restaurant = setupNewRestaurant();
+        restaurantDao.add(restaurant);
+        assertEquals(1, restaurantDao.getAll().size());
+    }
 }
