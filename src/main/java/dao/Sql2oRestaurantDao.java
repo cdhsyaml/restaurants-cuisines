@@ -73,4 +73,15 @@ public class Sql2oRestaurantDao implements RestaurantDao {
         }
     }
 
+    @Override
+    public void clearAllRestaurants() {
+        String sql = "DELETE from restaurants";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .executeUpdate();
+        } catch (Sql2oException ex){
+            System.out.println(ex);
+        }
+    }
+
 }

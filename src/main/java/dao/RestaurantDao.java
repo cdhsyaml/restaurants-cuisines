@@ -7,23 +7,23 @@ import java.util.List;
 
     public interface RestaurantDao {
 
-        //create
+        //create -------------
         void add (Restaurant restaurant);
 
-        //read
+        //read -------------
         List<Restaurant> getAll();
 
         Restaurant findById(int id);
 
 
-        //update
+        //update -------------
           void update(int id, String name);
 
 
-        //delete
+        //delete -------------
         void deleteById(int id);
 
-//   void clearAllRestaurants();
+        void clearAllRestaurants();
 
     }
 

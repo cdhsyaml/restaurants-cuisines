@@ -11,6 +11,7 @@ import org.sql2o.Sql2o;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 public class Sql2oRestaurantDaoTest {
 
@@ -82,4 +83,14 @@ public class Sql2oRestaurantDaoTest {
        assertEquals(0, restaurantDao.getAll().size());
     }
 
+    @Test
+    public void clearAllClearsAll() throws Exception {
+        Restaurant restaurant = setupNewRestaurant();
+        Restaurant restaurant2 = setupNewRestaurant2();
+        restaurantDao.add(restaurant);
+        restaurantDao.add(restaurant2);
+        int daoSize = restaurantDao.getAll().size();
+        restaurantDao.clearAllRestaurants();
+        assertTrue(daoSize > 0 && daoSize > restaurantDao.getAll().size());
+    }
 }
