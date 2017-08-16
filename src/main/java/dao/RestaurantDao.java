@@ -21,7 +21,7 @@ import java.util.List;
 
 
         //delete
-//   void deleteRestaurant();
+        void deleteById(int id);
 
 //   void clearAllRestaurants();
 

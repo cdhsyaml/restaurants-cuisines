@@ -32,6 +32,7 @@ public class Sql2oRestaurantDaoTest {
     }
 
     public Restaurant setupNewRestaurant() { return new Restaurant("Olive Garden");}
+    public Restaurant setupNewRestaurant2() { return new Restaurant("Chili's");}
 
     @Test
     public void addingCourseSetsId() throws Exception {
@@ -71,6 +72,14 @@ public class Sql2oRestaurantDaoTest {
         restaurantDao.update(restaurant.getId(), "Outback Steakhouse");
         Restaurant updatedRestaurant = restaurantDao.findById(restaurant.getId());
         assertNotEquals(initialName, updatedRestaurant.getName());
+    }
+
+    @Test
+    public void deleteByIdDeletesCorrectRestaurant() throws Exception {
+        Restaurant restaurant = setupNewRestaurant();
+       restaurantDao.add(restaurant);
+       restaurantDao.deleteById(restaurant.getId());
+       assertEquals(0, restaurantDao.getAll().size());
     }
 
 }
