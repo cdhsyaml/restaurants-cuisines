@@ -2,7 +2,7 @@
 
    {{#if editCuisine}}
        <h1>Edit this cuisine!</h1>
-       <form action="/cuisines/update" method="post">
+       <form action="/cuisines/{{cuisine.id}}/update" method="post">
        <select name="editCuisineId" id="editCuisineId">
        {{#each cuisines }}
            <option value="{{id}}">{{type}}</option>
@@ -14,7 +14,7 @@
    {{else}}
            <h1>Add a new Cuisine!</h1>
 
-       <form action="/cuisines" method="post">
+       <form action="/cuisines/new" method="post">
            <label for="type">Cuisine Type</label>
            <input id="type" name="type" type="text">
 

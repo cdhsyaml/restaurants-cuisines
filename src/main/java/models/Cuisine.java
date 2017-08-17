@@ -9,6 +9,7 @@ public class Cuisine {
 
     public Cuisine(String type) {
         this.type = type;
+//        this.id = id;
 
     }
 
