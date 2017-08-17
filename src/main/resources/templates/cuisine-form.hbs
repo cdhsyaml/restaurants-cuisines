@@ -1,14 +1,14 @@
 {{#partial "content"}}
 
    {{#if editCuisine}}
-       <h1>Edit this cuisine!</h1>
+       <h1>Edit the cuisine:</h1>
        <form action="/cuisines/{{cuisine.id}}/update" method="post">
        <select name="editCuisineId" id="editCuisineId">
        {{#each cuisines }}
            <option value="{{id}}">{{type}}</option>
        {{/each}}
        </select>
-           <label for="name">Edit this cuisine's type</label>
+           <label for="newCuisineType">Edit this cuisine's type</label>
            <input id="newCuisineType" name="newCuisineType" type="text" placeholder="new cuisine type">
 
    {{else}}

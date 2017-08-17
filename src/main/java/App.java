@@ -36,71 +36,72 @@ public class App {
 //            restaurantDao.clearAllRestaurants();
 //            return new ModelAndView(model, "success.hbs");
 //        }, new HandlebarsTemplateEngine());
-
-        //get: show new restaurant form
-        get("/restaurants/new", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            List<Cuisine> allCuisines = cuisineDao.getAll();
-            model.put("cuisines", allCuisines);
-            return new ModelAndView(model, "restaurant-form.hbs");
-        }, new HandlebarsTemplateEngine());
-
-        //task: process new restaurant form
-        post("/restaurants/new", (request, response) -> { //URL to make new task on POST route
-            Map<String, Object> model = new HashMap<>();
-            List<Cuisine> allCuisines = cuisineDao.getAll();
-            model.put("cuisines", allCuisines);
-
-            String name = request.queryParams("name");
-            int cuisineId = Integer.parseInt(request.queryParams("cuisineId"));
-            Restaurant newRestaurant = new Restaurant(name, cuisineId);
-            restaurantDao.add(newRestaurant);
-            model.put("restaurant", newRestaurant);
-            return new ModelAndView(model, "success.hbs");
-        }, new HandlebarsTemplateEngine());
-
-        //get: show an individual restaurant
-        get("/restaurants/:restaurant_id", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            int idOfRestaurantToFind = Integer.parseInt(req.params("restaurant_id")); //pull id - must match route segment
-            Restaurant foundRestaurant = restaurantDao.findById(idOfRestaurantToFind); //use it to find task
-            model.put("restaurant", foundRestaurant); //add it to model for template to display
-            return new ModelAndView(model, "restaurant-detail.hbs"); //individual task page.
-        }, new HandlebarsTemplateEngine());
-
-        //get: delete an individual restaurant
-        get("/cuisines/:cuisine_id/restaurants/:id/delete", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            int idOfRestaurantToDelete = Integer.parseInt(req.params("id")); //pull id - must match route segment
-            Restaurant deleteRestaurant = restaurantDao.findById(idOfRestaurantToDelete); //use it to find task
-            restaurantDao.deleteById(idOfRestaurantToDelete);
-            return new ModelAndView(model, "success.hbs");
-        }, new HandlebarsTemplateEngine());
-
-//        get: show a form to update a restaurant
-        get("cuisines/:cuisineId/restaurants/:id/update", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            int idOfRestaurantToEdit = Integer.parseInt(req.params("id"));
-            Restaurant editRestaurant = restaurantDao.findById(idOfRestaurantToEdit);
-            model.put("editRestaurant", editRestaurant);
-            List<Restaurant>allRestaurants = restaurantDao.getAll();//add all restaurants to model
-            List<Cuisine> allCuisines = cuisineDao.getAll();
-            model.put("restaurants", allRestaurants);
-            model.put("cuisines", allCuisines);
-            //add all cuisines to model
-            return new ModelAndView(model, "restaurant-form.hbs");
-        }, new HandlebarsTemplateEngine());
 //
-        //task: process a form to update a restaurant
-        post("cuisines/:cuisineId/restaurants/:id/update", (req, res) -> { //URL to make new task on POST route
-            Map<String, Object> model = new HashMap<>();
-            String newName = req.queryParams("name");
-            int idOfRestaurantToEdit = Integer.parseInt(req.params("id"));
-            int cuisineIdOfRestaurantToEdit = Integer.parseInt(req.params("cuisineId"));
-            Restaurant editRestaurant = restaurantDao.findById(idOfRestaurantToEdit);
-            restaurantDao.update(idOfRestaurantToEdit,newName, cuisineIdOfRestaurantToEdit);
-            return new ModelAndView(model, "success.hbs");
-        }, new HandlebarsTemplateEngine());
+//        //get: show new restaurant form
+//        get("/restaurants/new", (req, res) -> {
+//            Map<String, Object> model = new HashMap<>();
+//            List<Cuisine> allCuisines = cuisineDao.getAll();
+//            model.put("cuisines", allCuisines);
+//            return new ModelAndView(model, "restaurant-form.hbs");
+//        }, new HandlebarsTemplateEngine());
+//
+//        //task: process new restaurant form
+//        post("/restaurants/new", (request, response) -> { //URL to make new task on POST route
+//            Map<String, Object> model = new HashMap<>();
+//            List<Cuisine> allCuisines = cuisineDao.getAll();
+//            model.put("cuisines", allCuisines);
+//
+//            String name = request.queryParams("name");
+//            int cuisineId = Integer.parseInt(request.queryParams("cuisineId"));
+//            Restaurant newRestaurant = new Restaurant(name, cuisineId);
+//            restaurantDao.add(newRestaurant);
+//            model.put("restaurant", newRestaurant);
+//            return new ModelAndView(model, "success.hbs");
+//        }, new HandlebarsTemplateEngine());
+//
+//        //get: show an individual restaurant
+//        get("/restaurants/:restaurant_id", (req, res) -> {
+//            Map<String, Object> model = new HashMap<>();
+//            int idOfRestaurantToFind = Integer.parseInt(req.params("restaurant_id")); //pull id - must match route segment
+//            Restaurant foundRestaurant = restaurantDao.findById(idOfRestaurantToFind); //use it to find task
+//            model.put("restaurant", foundRestaurant); //add it to model for template to display
+//            return new ModelAndView(model, "restaurant-detail.hbs"); //individual task page.
+//        }, new HandlebarsTemplateEngine());
+//
+//        //get: delete an individual restaurant
+//        get("/cuisines/:cuisine_id/restaurants/:id/delete", (req, res) -> {
+//            Map<String, Object> model = new HashMap<>();
+//            int idOfRestaurantToDelete = Integer.parseInt(req.params("id")); //pull id - must match route segment
+//            Restaurant deleteRestaurant = restaurantDao.findById(idOfRestaurantToDelete); //use it to find task
+//            restaurantDao.deleteById(idOfRestaurantToDelete);
+//            return new ModelAndView(model, "success.hbs");
+//        }, new HandlebarsTemplateEngine());
+//
+////        get: show a form to update a restaurant
+//        get("cuisines/:cuisineId/restaurants/:id/update", (req, res) -> {
+//            Map<String, Object> model = new HashMap<>();
+//            int idOfRestaurantToEdit = Integer.parseInt(req.params("id"));
+//            Restaurant editRestaurant = restaurantDao.findById(idOfRestaurantToEdit);
+//            model.put("editRestaurant", editRestaurant);
+//            List<Restaurant>allRestaurants = restaurantDao.getAll();//add all restaurants to model
+//            List<Cuisine> allCuisines = cuisineDao.getAll();
+//            model.put("restaurants", allRestaurants);
+//            model.put("cuisines", allCuisines);
+//            //add all cuisines to model
+//            return new ModelAndView(model, "restaurant-form.hbs");
+//        }, new HandlebarsTemplateEngine());
+////
+//        //task: process a form to update a restaurant
+//        post("cuisines/:id/restaurants/:id/update", (req, res) -> { //URL to make new task on POST route
+//            Map<String, Object> model = new HashMap<>();
+//            String newName = req.queryParams("name");
+//            int idOfRestaurantToEdit = Integer.parseInt(req.params("id"));
+//            int cuisineIdOfRestaurantToEdit = Integer.parseInt(req.queryParams("id"));
+//            Restaurant editRestaurant = restaurantDao.findById(idOfRestaurantToEdit);
+////            Cuisine editCuisine = cuisineDao.findById(cuisineIdOfRestaurantToEdit);
+//            restaurantDao.update(idOfRestaurantToEdit,newName, cuisineIdOfRestaurantToEdit);
+//            return new ModelAndView(model, "success.hbs");
+//        }, new HandlebarsTemplateEngine());
 
         ////show new cuisine form
         get("/cuisines/new", (req, res) -> {
@@ -140,35 +141,35 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
 
-////get: show a form to update a cuisine
-//        get("/cuisines/:cuisineId/update", (req, res) -> {
-//            Map<String, Object> model = new HashMap<>();
-//            int thisId = Integer.parseInt(req.params("cuisineId"));
-//            model.put("editCuisine", true);
-//            List<Cuisine> allCuisines = cuisineDao.getAll();
-//            model.put("cuisines", allCuisines);
-//            return new ModelAndView(model, "cuisine-form.hbs");
-//        }, new HandlebarsTemplateEngine());
-//
-//        //post: process a form to update a cuisine and restaurants it contains
-//        post("/cuisines/update", (req, res) -> {
-//            Map<String, Object> model = new HashMap<>();
-//            int idOfCuisineToEdit = Integer.parseInt(req.queryParams("editCuisineId"));
-//            String newName = req.queryParams("newCuisineName");
-//            cuisineDao.update(cuisineDao.findById(idOfCuisineToEdit).getId(), newName);
-//            List<Cuisine> allCuisines = cuisineDao.getAll(); //refresh list of links for navbar.
-//            model.put("cuisines", allCuisines);
-//            return new ModelAndView(model, "success.hbs");
-//        }, new HandlebarsTemplateEngine());
-//
-//        //get: delete an individual cuisine
-//        get("cuisines/:cuisine_id/delete", (req, res) -> {
-//            Map<String, Object> model = new HashMap<>();
-//            int idOfCuisineToDelete = Integer.parseInt(req.params("cuisine_id")); //pull id - must match route segment
-//            Cuisine deleteCuisine = cuisineDao.findById(idOfCuisineToDelete); //use it to find task
-//            cuisineDao.deleteCuisineById(idOfCuisineToDelete);
-//            return new ModelAndView(model, "success.hbs");
-//        }, new HandlebarsTemplateEngine());
+//get: show a form to update a cuisine
+        get("/cuisines/:cuisineId/update", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int thisId = Integer.parseInt(req.params("cuisineId"));
+            model.put("editCuisine", true);
+            List<Cuisine> allCuisines = cuisineDao.getAll();
+            model.put("cuisines", allCuisines);
+            return new ModelAndView(model, "cuisine-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //post: process a form to update a cuisine and restaurants it contains
+        post("/cuisines/update", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfCuisineToEdit = Integer.parseInt(req.queryParams("editCuisineId"));
+            String newName = req.queryParams("newCuisineType");
+            cuisineDao.update(cuisineDao.findById(idOfCuisineToEdit).getId(), newName);
+            List<Cuisine> allCuisines = cuisineDao.getAll(); //refresh list of links for navbar.
+            model.put("cuisines", allCuisines);
+            return new ModelAndView(model, "index.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //get: delete an individual cuisine
+        get("cuisines/:cuisine_id/delete", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfCuisineToDelete = Integer.parseInt(req.params("cuisine_id")); //pull id - must match route segment
+            Cuisine deleteCuisine = cuisineDao.findById(idOfCuisineToDelete); //use it to find task
+            cuisineDao.deleteCuisineById(idOfCuisineToDelete);
+            return new ModelAndView(model, "success.hbs");
+        }, new HandlebarsTemplateEngine());
 //
 //        //get: delete all cuisines and all restaurants
 //        get("/cuisines/delete", (req, res) -> {
