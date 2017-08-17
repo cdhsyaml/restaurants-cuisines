@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import dao.RestaurantDao;
 import dao.Sql2oCuisineDao;
 import dao.Sql2oRestaurantDao;
 import models.Cuisine;
@@ -31,11 +32,11 @@ public class App {
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());//get: delete all restaurants
 //
-//        get("/restaurants/delete", (req, res) -> {
-//            Map<String, Object> model = new HashMap<>();
-//            restaurantDao.clearAllRestaurants();
-//            return new ModelAndView(model, "success.hbs");
-//        }, new HandlebarsTemplateEngine());
+        get("/restaurants/delete", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            restaurantDao.clearAllRestaurants();
+            return new ModelAndView(model, "success.hbs");
+        }, new HandlebarsTemplateEngine());
 //
 //        //get: show new restaurant form
         get("/restaurants/new", (req, res) -> {
@@ -67,15 +68,15 @@ public class App {
             model.put("restaurant", foundRestaurant); //add it to model for template to display
             return new ModelAndView(model, "restaurant-detail.hbs"); //individual task page.
         }, new HandlebarsTemplateEngine());
-//
-//        //get: delete an individual restaurant
-//        get("/cuisines/:cuisine_id/restaurants/:id/delete", (req, res) -> {
-//            Map<String, Object> model = new HashMap<>();
-//            int idOfRestaurantToDelete = Integer.parseInt(req.params("id")); //pull id - must match route segment
-//            Restaurant deleteRestaurant = restaurantDao.findById(idOfRestaurantToDelete); //use it to find task
-//            restaurantDao.deleteById(idOfRestaurantToDelete);
-//            return new ModelAndView(model, "success.hbs");
-//        }, new HandlebarsTemplateEngine());
+
+        //get: delete an individual restaurant
+        get("/cuisines/:cuisine_id/restaurants/:id/delete", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfRestaurantToDelete = Integer.parseInt(req.params("id")); //pull id - must match route segment
+            Restaurant deleteRestaurant = restaurantDao.findById(idOfRestaurantToDelete); //use it to find task
+            restaurantDao.deleteById(idOfRestaurantToDelete);
+            return new ModelAndView(model, "success.hbs");
+        }, new HandlebarsTemplateEngine());
 //
 //        get: show a form to update a restaurant
         get("cuisines/:cuisineId/restaurants/:id/update", (req, res) -> {
@@ -100,7 +101,6 @@ public class App {
             int idOfRestaurantToEdit = Integer.parseInt(req.params("id"));
             int cuisineIdOfRestaurantToEdit = Integer.parseInt(req.params("cuisineId"));
             Restaurant editRestaurant = restaurantDao.findById(idOfRestaurantToEdit);
-//            Cuisine editCuisine = cuisineDao.findById(cuisineIdOfRestaurantToEdit);
             restaurantDao.update(idOfRestaurantToEdit,newName, cuisineIdOfRestaurantToEdit);
             model.put("idOfRestaurantToEdit", idOfRestaurantToEdit);
             return new ModelAndView(model, "success.hbs");
@@ -166,7 +166,7 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         //get: delete an individual cuisine
-        get("cuisines/:cuisine_id/delete", (req, res) -> {
+        get("/cuisines/:cuisine_id/delete", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int idOfCuisineToDelete = Integer.parseInt(req.params("cuisine_id")); //pull id - must match route segment
             Cuisine deleteCuisine = cuisineDao.findById(idOfCuisineToDelete); //use it to find task
@@ -175,11 +175,11 @@ public class App {
         }, new HandlebarsTemplateEngine());
 //
 //        //get: delete all cuisines and all restaurants
-//        get("/cuisines/delete", (req, res) -> {
+//             get("/restaurants/delete", (req, res) -> {
 //            Map<String, Object> model = new HashMap<>();
 //            restaurantDao.clearAllRestaurants();
 //            cuisineDao.clearAllCuisines();
-//
+//            List<Restaurant> allRestaurants = restaurantDao.getAll();
 //            List<Cuisine> allCuisines = cuisineDao.getAll();
 //            model.put("cuisines", allCuisines);
 //
