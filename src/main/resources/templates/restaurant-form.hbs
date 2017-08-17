@@ -1,23 +1,14 @@
 {{#partial "content"}}
 
    {{#if editRestaurant}}
-       <form action="/cuisines/{{restaurant.cuisineId}}/restaurants/{{restaurant.id}}/update" method="post"> <!--fix-->
+       <form action="/cuisines/{{cuisineIdOfRestaurantToEdit}}/restaurants/{{editRestaurant.id}}/update" method="post"> <!--fix-->
        <h1>Edit this Restaurant!</h1>
-        <select id="restaurantToEditId" name="restaurantToEditId">
-       {{#each restaurants }}
-               <option value="{{id}}">{{name}}</option>
-       {{/each}}
-       </select>
+
        <br>
            <label for="name">Edit this restaurant's name</label>
            <input id="name" name="name" type="text" placeholder="Enter a new name">
            <br>
-           <label for="cuisineId">Update this restaurant's cuisine:</label>
-           <select id="cuisineId" name="cuisineId">
-               {{#each cuisines}}
-                   <option value="{{id}}" >{{type}}</option>
-               {{/each}}
-           </select>
+
            <p>Don't see the right cuisine?<a href="/cuisines/new">Add a new one first.</a></p>
 
    {{else}}
